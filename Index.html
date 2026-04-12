@@ -29,12 +29,6 @@ body{background:var(--bg);color:var(--ink);font-family:'Outfit',sans-serif;font-
 .cursor-ring.hover{width:56px;height:56px;opacity:0.2;}
 @media(hover:none){.cursor,.cursor-ring{display:none;}body{cursor:auto;}}
 
-/* PLACEHOLDER */
-.ph{width:100%;height:100%;background:var(--bg2);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;border:2px dashed rgba(184,137,58,0.3);}
-.ph-icon{font-size:26px;opacity:0.35;}
-.ph-label{font-size:10px;letter-spacing:0.18em;text-transform:uppercase;color:var(--ink2);opacity:0.5;text-align:center;padding:0 16px;line-height:1.6;}
-.ph-size{font-size:9px;letter-spacing:0.1em;color:var(--gold);opacity:0.7;}
-
 /* NAV */
 nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:center;justify-content:space-between;padding:14px 60px;background:rgba(247,243,238,0.97);backdrop-filter:blur(16px);border-bottom:1px solid rgba(184,137,58,0.12);transition:padding 0.4s;}
 nav.compact{padding:10px 60px;}
@@ -42,47 +36,19 @@ nav.compact{padding:10px 60px;}
 /* SPINNING WHEEL LOGO */
 .nav-logo{text-decoration:none;display:flex;align-items:center;}
 .nav-logo-wheel{
-  width:46px; height:46px;
-  border-radius:50%;
+  width:46px;height:46px;border-radius:50%;
   border:1.5px dashed rgba(184,137,58,0.6);
   background:var(--bg2);
   display:flex;align-items:center;justify-content:center;
-  font-size:9px;letter-spacing:0.08em;text-transform:uppercase;
-  color:var(--gold);font-weight:400;
-  /* Slow continuous spin like a wheel */
+  font-size:8px;letter-spacing:0.08em;text-transform:uppercase;color:var(--gold);font-weight:400;
   animation:wheelSpin 8s linear infinite;
-  flex-shrink:0;
-  position:relative;
+  flex-shrink:0;position:relative;
 }
-/* Spokes to make it feel like a wheel */
-.nav-logo-wheel::before{
-  content:'';
-  position:absolute;inset:4px;
-  border-radius:50%;
-  border:1px solid rgba(184,137,58,0.2);
-}
-.nav-logo-wheel::after{
-  content:'';
-  position:absolute;
-  width:1px;height:70%;
-  background:rgba(184,137,58,0.25);
-  top:15%;left:50%;
-  box-shadow:11px 0 0 rgba(184,137,58,0.15), -11px 0 0 rgba(184,137,58,0.15);
-}
-@keyframes wheelSpin{
-  from{transform:rotate(0deg);}
-  to{transform:rotate(360deg);}
-}
-/* Logo text stays readable — counter-rotates */
-.nav-logo-text{
-  position:absolute;
-  animation:wheelSpinReverse 8s linear infinite;
-  font-size:8px;letter-spacing:0.1em;
-}
-@keyframes wheelSpinReverse{
-  from{transform:rotate(0deg);}
-  to{transform:rotate(-360deg);}
-}
+.nav-logo-wheel::before{content:'';position:absolute;inset:4px;border-radius:50%;border:1px solid rgba(184,137,58,0.2);}
+.nav-logo-wheel::after{content:'';position:absolute;width:1px;height:70%;background:rgba(184,137,58,0.25);top:15%;left:50%;box-shadow:11px 0 0 rgba(184,137,58,0.15),-11px 0 0 rgba(184,137,58,0.15);}
+@keyframes wheelSpin{from{transform:rotate(0deg);}to{transform:rotate(360deg);}}
+.nav-logo-text{position:absolute;animation:wheelSpinReverse 8s linear infinite;font-size:8px;letter-spacing:0.1em;}
+@keyframes wheelSpinReverse{from{transform:rotate(0deg);}to{transform:rotate(-360deg);}}
 
 .nav-links{display:flex;align-items:center;gap:28px;}
 .nav-links a{font-size:11px;font-weight:400;letter-spacing:0.18em;text-transform:uppercase;color:var(--ink2);text-decoration:none;transition:color 0.3s;position:relative;}
@@ -107,7 +73,7 @@ nav.compact{padding:10px 60px;}
 /* HERO */
 .hero{height:100vh;min-height:600px;display:grid;grid-template-columns:55% 45%;padding-top:62px;}
 .hero-img{position:relative;overflow:hidden;}
-.hero-img .ph{border:none;background:var(--bg2);}
+.hero-img img{width:100%;height:100%;object-fit:cover;}
 .hero-img-badge{
   position:absolute;top:40%;left:28px;transform:translateY(-50%);
   background:var(--white);padding:16px 22px;
@@ -163,7 +129,8 @@ nav.compact{padding:10px 60px;}
 .leistungen-head-right{font-size:10px;letter-spacing:0.1em;color:var(--blush2);max-width:200px;line-height:1.7;text-align:right;}
 .photo-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:3px;}
 .pgrid-tile{position:relative;overflow:hidden;cursor:none;aspect-ratio:4/3;}
-.pgrid-tile .ph{border:none;background:var(--bg2);}
+.pgrid-tile img{width:100%;height:100%;object-fit:cover;filter:brightness(0.45) saturate(0.7);transition:all 0.5s ease;}
+.pgrid-tile:hover img{filter:brightness(0.28) saturate(0.6);transform:scale(1.06);}
 .pgrid-overlay{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:flex-end;padding:22px;background:linear-gradient(to top,rgba(44,24,16,0.9) 0%,transparent 60%);transition:background 0.45s;}
 .pgrid-tile:hover .pgrid-overlay{background:linear-gradient(to top,rgba(44,24,16,0.97) 0%,rgba(44,24,16,0.35) 75%);}
 .pgrid-num{font-size:10px;letter-spacing:0.2em;color:var(--gold);opacity:0.6;margin-bottom:6px;transition:letter-spacing 0.3s;}
@@ -180,7 +147,7 @@ nav.compact{padding:10px 60px;}
 /* ÜBER */
 .ueber{min-height:100vh;display:grid;grid-template-columns:1fr 1fr;background:var(--white);}
 .ueber-img{position:relative;overflow:hidden;}
-.ueber-img .ph{border:none;background:var(--bg2);}
+.ueber-img img{width:100%;height:100%;object-fit:cover;object-position:top;}
 .ueber-content{padding:80px 75px;display:flex;flex-direction:column;justify-content:center;}
 .ueber-quote{font-family:'Gloock',serif;font-size:clamp(17px,2.1vw,24px);font-style:italic;line-height:1.55;color:var(--mocha);border-left:3px solid var(--gold);padding-left:22px;margin:22px 0 26px;}
 .ueber-body{font-size:13px;line-height:1.9;color:var(--ink2);margin-bottom:12px;}
@@ -195,7 +162,8 @@ nav.compact{padding:10px 60px;}
 .team-card{background:var(--white);overflow:hidden;transition:transform 0.4s cubic-bezier(0.25,0.46,0.45,0.94),box-shadow 0.4s;}
 .team-card:hover{transform:translateY(-8px);box-shadow:0 20px 55px rgba(44,24,16,0.12);}
 .team-card-img{position:relative;overflow:hidden;aspect-ratio:3/4;}
-.team-card-img .ph{border:none;background:var(--bg2);}
+.team-card-img img{width:100%;height:100%;object-fit:cover;object-position:top;transition:transform 0.5s;}
+.team-card:hover .team-card-img img{transform:scale(1.04);}
 .team-card-img::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,transparent 40%,rgba(184,137,58,0.15) 50%,transparent 60%);transform:translateX(-100%);transition:transform 0.5s ease;}
 .team-card:hover .team-card-img::after{transform:translateX(100%);}
 .team-card-body{padding:26px 26px 30px;}
@@ -294,11 +262,8 @@ footer{background:var(--mocha);padding:36px 60px;display:flex;align-items:center
 
 /* RESPONSIVE */
 @media(max-width:1100px){
-  nav{padding:12px 24px;}
-  nav.compact{padding:8px 24px;}
-  .nav-links{display:none;}
-  .burger{display:flex;}
-  .drawer{display:flex;}
+  nav{padding:12px 24px;}nav.compact{padding:8px 24px;}
+  .nav-links{display:none;}.burger{display:flex;}.drawer{display:flex;}
   .hero{grid-template-columns:1fr;height:auto;}
   .hero-img{height:52vw;min-height:280px;max-height:440px;}
   .hero-img-badge{top:50%;left:20px;}
@@ -311,24 +276,21 @@ footer{background:var(--mocha);padding:36px 60px;display:flex;align-items:center
   .ueber{grid-template-columns:1fr;min-height:auto;}
   .ueber-img{height:60vw;min-height:240px;max-height:380px;}
   .ueber-content{padding:50px 24px;}
-  .team{padding:70px 20px;}
-  .team-grid{grid-template-columns:1fr 1fr;gap:16px;}
+  .team{padding:70px 20px;}.team-grid{grid-template-columns:1fr 1fr;gap:16px;}
   .termin{min-height:auto;padding:70px 24px;}
   .termin-hours{flex-direction:column;gap:14px;padding:16px 22px;}
   .reviews{padding:70px 20px;}
   .rev-header{grid-template-columns:1fr;gap:20px;}
   .rev-grid{grid-template-columns:1fr;gap:12px;}
   .kontakt{grid-template-columns:1fr;}
-  .k-left{padding:60px 24px;}
-  .k-right{padding:60px 24px;}
+  .k-left{padding:60px 24px;}.k-right{padding:60px 24px;}
   .form-2col{grid-template-columns:1fr;}
   footer{padding:28px 24px;flex-direction:column;align-items:flex-start;gap:12px;}
 }
 @media(max-width:600px){
   .photo-grid{grid-template-columns:1fr;}
   .team-grid{grid-template-columns:1fr;}
-  .ueber-stats{gap:20px;}
-  .hero-stat-row{gap:20px;}
+  .ueber-stats{gap:20px;}.hero-stat-row{gap:20px;}
 }
 </style>
 </head>
@@ -337,7 +299,7 @@ footer{background:var(--mocha);padding:36px 60px;display:flex;align-items:center
 <div class="cursor" id="cursor"></div>
 <div class="cursor-ring" id="cursorRing"></div>
 
-<!-- NAV — Logo dreht sich wie ein Rad -->
+<!-- NAV -->
 <nav id="nav">
   <a href="#" class="nav-logo">
     <div class="nav-logo-wheel">
@@ -370,11 +332,7 @@ footer{background:var(--mocha);padding:36px 60px;display:flex;align-items:center
 <!-- HERO -->
 <section class="hero">
   <div class="hero-img">
-    <div class="ph" style="border:none;">
-      <div class="ph-icon">📷</div>
-      <div class="ph-label">hero-bg.jpg</div>
-      <div class="ph-size">1200 × 900 px</div>
-    </div>
+    <img src="hero-bg.png" alt="Beauty Up Kosmetikstudio Fohnsdorf">
     <div class="hero-img-badge">
       <span class="badge-num">5,0</span>
       <span class="badge-stars">★★★★★</span>
@@ -403,22 +361,8 @@ footer{background:var(--mocha);padding:36px 60px;display:flex;align-items:center
 <!-- MARQUEE -->
 <div class="marquee-strip">
   <div class="marquee-inner">
-    <span class="m-item">Kosmetik ·</span>
-    <span class="m-item">Make-up ·</span>
-    <span class="m-item">Nagelpflege & Design ·</span>
-    <span class="m-item">Fußpflege ·</span>
-    <span class="m-item">Online-Hautberatung ·</span>
-    <span class="m-item">Coaching ·</span>
-    <span class="m-item">Beautybox ·</span>
-    <span class="m-item">Fühl dich schön ·</span>
-    <span class="m-item">Kosmetik ·</span>
-    <span class="m-item">Make-up ·</span>
-    <span class="m-item">Nagelpflege & Design ·</span>
-    <span class="m-item">Fußpflege ·</span>
-    <span class="m-item">Online-Hautberatung ·</span>
-    <span class="m-item">Coaching ·</span>
-    <span class="m-item">Beautybox ·</span>
-    <span class="m-item">Fühl dich schön ·</span>
+    <span class="m-item">Kosmetik ·</span><span class="m-item">Make-up ·</span><span class="m-item">Nagelpflege & Design ·</span><span class="m-item">Fußpflege ·</span><span class="m-item">Online-Hautberatung ·</span><span class="m-item">Coaching ·</span><span class="m-item">Beautybox ·</span><span class="m-item">Fühl dich schön ·</span>
+    <span class="m-item">Kosmetik ·</span><span class="m-item">Make-up ·</span><span class="m-item">Nagelpflege & Design ·</span><span class="m-item">Fußpflege ·</span><span class="m-item">Online-Hautberatung ·</span><span class="m-item">Coaching ·</span><span class="m-item">Beautybox ·</span><span class="m-item">Fühl dich schön ·</span>
   </div>
 </div>
 
@@ -433,35 +377,35 @@ footer{background:var(--mocha);padding:36px 60px;display:flex;align-items:center
   </div>
   <div class="photo-grid">
     <div class="pgrid-tile reveal">
-      <div class="ph"><div class="ph-icon">📷</div><div class="ph-label">leistung-kosmetik.jpg</div><div class="ph-size">700 × 525 px</div></div>
+      <img src="leistung-kosmetik.png" alt="Kosmetik">
       <div class="pgrid-overlay"><div class="pgrid-num">01</div><div class="pgrid-name">Kosmetik</div><div class="pgrid-sub">Individuelle Gesichtsbehandlungen für jede Haut.</div><span class="pgrid-arrow">→</span></div>
     </div>
     <div class="pgrid-tile reveal rd1">
-      <div class="ph"><div class="ph-icon">📷</div><div class="ph-label">leistung-makeup.jpg</div><div class="ph-size">700 × 525 px</div></div>
+      <img src="leistung-makeup.png" alt="Make-up">
       <div class="pgrid-overlay"><div class="pgrid-num">02</div><div class="pgrid-name">Make-up</div><div class="pgrid-sub">Professionelles Make-up für jeden Anlass.</div><span class="pgrid-arrow">→</span></div>
     </div>
     <div class="pgrid-tile reveal rd2">
-      <div class="ph"><div class="ph-icon">📷</div><div class="ph-label">leistung-nagel.jpg</div><div class="ph-size">700 × 525 px</div></div>
+      <img src="leistung-nagel.png" alt="Nagelpflege und Design">
       <div class="pgrid-overlay"><div class="pgrid-num">03</div><div class="pgrid-name">Nagelpflege & Design</div><div class="pgrid-sub">Von klassisch bis kreativ — perfekte Nägel.</div><span class="pgrid-arrow">→</span></div>
     </div>
     <div class="pgrid-tile reveal rd3">
-      <div class="ph"><div class="ph-icon">📷</div><div class="ph-label">leistung-fusspflege.jpg</div><div class="ph-size">700 × 525 px</div></div>
+      <img src="leistung-fusspflege.png" alt="Fußpflege">
       <div class="pgrid-overlay"><div class="pgrid-num">04</div><div class="pgrid-name">Fußpflege</div><div class="pgrid-sub">Verwöhnende Behandlung für gepflegte Füße.</div><span class="pgrid-arrow">→</span></div>
     </div>
     <div class="pgrid-tile reveal">
-      <div class="ph"><div class="ph-icon">📷</div><div class="ph-label">leistung-hautberatung.jpg</div><div class="ph-size">700 × 525 px</div></div>
+      <img src="leistung-hautberatung.png" alt="Online-Hautberatung">
       <div class="pgrid-overlay"><div class="pgrid-num">05</div><div class="pgrid-name">Online-Hautberatung</div><div class="pgrid-sub">Professionelle Beratung bequem von zuhause.</div><span class="pgrid-arrow">→</span></div>
     </div>
     <div class="pgrid-tile reveal rd1">
-      <div class="ph"><div class="ph-icon">📷</div><div class="ph-label">leistung-coaching.jpg</div><div class="ph-size">700 × 525 px</div></div>
+      <img src="leistung-coaching.png" alt="Coaching">
       <div class="pgrid-overlay"><div class="pgrid-num">06</div><div class="pgrid-name">Coaching</div><div class="pgrid-sub">Persönliches Coaching für dein inneres Strahlen.</div><span class="pgrid-arrow">→</span></div>
     </div>
     <div class="pgrid-tile reveal rd2">
-      <div class="ph"><div class="ph-icon">📷</div><div class="ph-label">leistung-beautybox.jpg</div><div class="ph-size">700 × 525 px</div></div>
+      <img src="leistung-beautybox.png" alt="Beautybox">
       <div class="pgrid-overlay"><div class="pgrid-num">07</div><div class="pgrid-name">Beautybox</div><div class="pgrid-sub">Kuratierte Schönheitsprodukte direkt zu dir.</div><span class="pgrid-arrow">→</span></div>
     </div>
     <div class="pgrid-tile reveal rd3">
-      <div class="ph"><div class="ph-icon">📷</div><div class="ph-label">leistung-fuehldichhschoen.jpg</div><div class="ph-size">700 × 525 px</div></div>
+      <img src="leistung-fuehldichhschoen.png" alt="Fühl dich schön">
       <div class="pgrid-overlay"><div class="pgrid-num">08</div><div class="pgrid-name">Fühl dich schön</div><div class="pgrid-sub">Das Onlineprogramm — dein persönliches Erfolgsrezept.</div><span class="pgrid-arrow">→</span></div>
     </div>
   </div>
@@ -472,7 +416,7 @@ footer{background:var(--mocha);padding:36px 60px;display:flex;align-items:center
 <!-- ÜBER NICOLE -->
 <section id="ueber" class="ueber">
   <div class="ueber-img reveal-left">
-    <div class="ph"><div class="ph-icon">📷</div><div class="ph-label">nicole-portrait.jpg</div><div class="ph-size">900 × 1100 px</div></div>
+    <img src="nicole-portrait.png" alt="Nicole Scheucher – Inhaberin Beauty Up">
   </div>
   <div class="ueber-content reveal-right">
     <p class="section-tag">Über Nicole</p>
@@ -499,7 +443,7 @@ footer{background:var(--mocha);padding:36px 60px;display:flex;align-items:center
   <div class="team-grid">
     <div class="team-card reveal">
       <div class="team-card-img">
-        <div class="ph"><div class="ph-icon">📷</div><div class="ph-label">team-nicole.jpg</div><div class="ph-size">600 × 800 px</div></div>
+        <img src="team-nicole.png" alt="Nicole Scheucher">
       </div>
       <div class="team-card-body">
         <p class="team-role">Inhaberin · Kosmetikmeisterin</p>
@@ -510,7 +454,7 @@ footer{background:var(--mocha);padding:36px 60px;display:flex;align-items:center
     </div>
     <div class="team-card reveal rd1">
       <div class="team-card-img">
-        <div class="ph"><div class="ph-icon">📷</div><div class="ph-label">team-tanja.jpg</div><div class="ph-size">600 × 800 px</div></div>
+        <img src="team-tanja.png" alt="Tanja Neubacher">
       </div>
       <div class="team-card-body">
         <p class="team-role">Kosmetikerin</p>
@@ -521,7 +465,7 @@ footer{background:var(--mocha);padding:36px 60px;display:flex;align-items:center
     </div>
     <div class="team-card reveal rd2">
       <div class="team-card-img">
-        <div class="ph"><div class="ph-icon">📷</div><div class="ph-label">team-maria.jpg</div><div class="ph-size">600 × 800 px</div></div>
+        <img src="team-maria.png" alt="Maria Schnabl">
       </div>
       <div class="team-card-body">
         <p class="team-role">Kosmetikerin</p>
