@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Beauty Up – Kosmetikstudio | Fohnsdorf</title>
+<link href="https://fonts.googleapis.com/css2?family=Gloock&family=Outfit:wght@200;300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #f7f3ee;
+  --bg2: #eee8df;
+  --ink: #1e1410;
+  --ink2: #3d2e24;
+  --mocha: #2c1810;
+  --gold: #b8893a;
+  --gold-lt: #d4a95a;
+  --blush: #e8c4b0;
+  --blush2: #c49a7a;
+  --white: #fdfaf7;
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--ink);font-family:'Outfit',sans-serif;font-weight:300;overflow-x:hidden;}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:center;justify-content:space-between;padding:18px 60px;background:rgba(247,243,238,0.97);backdrop-filter:blur(12px);border-bottom:1px solid rgba(184,137,58,0.12);transition:padding 0.3s;}
+nav.compact{padding:11px 60px;}
+.nav-logo{font-family:'Gloock',serif;font-size:20px;letter-spacing:0.1em;color:var(--mocha);text-decoration:none;}
+.nav-logo span{color:var(--gold);}
+.nav-links{display:flex;align-items:center;gap:30px;}
+.nav-links a{font-size:11px;font-weight:400;letter-spacing:0.18em;text-transform:uppercase;color:var(--ink2);text-decoration:none;transition:color 0.3s;}
+.nav-links a:hover{color:var(--gold);}
+.nav-btn{background:var(--mocha)!important;color:var(--bg)!important;padding:10px 24px;letter-spacing:0.2em!important;transition:background 0.3s!important;}
+.nav-btn:hover{background:var(--gold)!important;}
+.burger{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;}
+.burger span{display:block;width:22px;height:1.5px;background:var(--mocha);}
+
+/* DRAWER */
+.drawer{display:none;position:fixed;top:0;right:-100%;width:260px;height:100vh;background:var(--white);border-left:1px solid var(--bg2);z-index:300;padding:80px 36px 40px;flex-direction:column;transition:right 0.4s;}
+.drawer.open{right:0;}
+.drawer a{font-size:12px;letter-spacing:0.2em;text-transform:uppercase;color:var(--ink2);text-decoration:none;padding:16px 0;border-bottom:1px solid var(--bg2);display:block;transition:color 0.3s;}
+.drawer a:hover{color:var(--gold);}
+.drawer-x{position:absolute;top:22px;right:22px;background:none;border:none;font-size:20px;color:var(--ink2);cursor:pointer;}
+.drawer-ov{display:none;position:fixed;inset:0;background:rgba(30,20,16,0.4);z-index:299;}
+.drawer-ov.open{display:block;}
+
+/* HERO */
+.hero{height:100vh;min-height:600px;display:grid;grid-template-columns:55% 45%;padding-top:62px;}
+.hero-img{position:relative;overflow:hidden;}
+.hero-img img{width:100%;height:100%;object-fit:cover;}
+.hero-img-tag{position:absolute;bottom:32px;left:32px;background:var(--white);padding:14px 22px;display:flex;flex-direction:column;gap:3px;}
+.hit-num{font-family:'Gloock',serif;font-size:26px;color:var(--gold);line-height:1;}
+.hit-label{font-size:9px;letter-spacing:0.25em;text-transform:uppercase;color:var(--ink2);}
+.hero-copy{background:var(--white);display:flex;flex-direction:column;justify-content:center;padding:36px 55px 36px 50px;}
+.hero-eyebrow{display:flex;align-items:center;gap:14px;margin-bottom:22px;opacity:0;animation:slideUp 0.7s 0.3s forwards;}
+.eyebrow-line{width:32px;height:1px;background:var(--gold);}
+.eyebrow-text{font-size:10px;letter-spacing:0.35em;text-transform:uppercase;color:var(--gold);}
+.hero-h1{font-family:'Gloock',serif;font-size:clamp(34px,4.2vw,62px);line-height:1.1;color:var(--mocha);margin-bottom:16px;opacity:0;animation:slideUp 0.7s 0.45s forwards;}
+.hero-h1 em{font-style:italic;color:var(--gold);}
+.hero-p{font-size:13px;line-height:1.85;color:var(--ink2);max-width:340px;margin-bottom:28px;opacity:0;animation:slideUp 0.7s 0.6s forwards;}
+.hero-actions{display:flex;gap:12px;flex-wrap:wrap;opacity:0;animation:slideUp 0.7s 0.75s forwards;}
+.btn-dark{display:inline-block;background:var(--mocha);color:var(--bg);font-size:10px;font-weight:400;letter-spacing:0.25em;text-transform:uppercase;padding:13px 32px;text-decoration:none;transition:all 0.3s;}
+.btn-dark:hover{background:var(--gold);}
+.btn-outline{display:inline-block;border:1.5px solid var(--mocha);color:var(--mocha);font-size:10px;font-weight:400;letter-spacing:0.25em;text-transform:uppercase;padding:13px 32px;text-decoration:none;transition:all 0.3s;}
+.btn-outline:hover{border-color:var(--gold);color:var(--gold);}
+.hero-stat-row{display:flex;gap:28px;margin-top:28px;padding-top:24px;border-top:1px solid var(--bg2);opacity:0;animation:slideUp 0.7s 0.9s forwards;}
+.hstat-n{font-family:'Gloock',serif;font-size:24px;color:var(--mocha);}
+.hstat-l{font-size:9px;letter-spacing:0.2em;text-transform:uppercase;color:var(--blush2);margin-top:3px;}
+
+/* MARQUEE */
+.marquee-strip{background:var(--mocha);padding:11px 0;overflow:hidden;}
+.marquee-inner{display:flex;width:max-content;animation:marquee 16s linear infinite;}
+.m-item{font-size:9px;letter-spacing:0.35em;text-transform:uppercase;color:var(--blush);padding:0 26px;white-space:nowrap;flex-shrink:0;}
+@keyframes marquee{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+
+/* SECTIONS */
+.section-tag{font-size:9px;letter-spacing:0.4em;text-transform:uppercase;color:var(--gold);margin-bottom:12px;}
+.section-title{font-family:'Gloock',serif;font-size:clamp(26px,3vw,44px);line-height:1.15;color:var(--mocha);}
+.section-title em{font-style:italic;color:var(--gold);}
+
+/* LEISTUNGEN */
+.leistungen{padding:90px 60px;background:var(--bg);}
+.leistungen-head{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:44px;}
+.leistungen-head-right{font-size:10px;letter-spacing:0.1em;color:var(--blush2);max-width:200px;line-height:1.7;text-align:right;}
+.photo-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:3px;}
+.pgrid-tile{position:relative;overflow:hidden;cursor:pointer;aspect-ratio:4/3;}
+.pgrid-tile img{width:100%;height:100%;object-fit:cover;filter:brightness(0.42) saturate(0.7);transition:all 0.5s ease;}
+.pgrid-tile:hover img{filter:brightness(0.28) saturate(0.6);transform:scale(1.06);}
+.pgrid-overlay{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:flex-end;padding:22px;background:linear-gradient(to top,rgba(44,24,16,0.88) 0%,transparent 55%);transition:background 0.4s;}
+.pgrid-tile:hover .pgrid-overlay{background:linear-gradient(to top,rgba(44,24,16,0.96) 0%,rgba(44,24,16,0.3) 70%);}
+.pgrid-num{font-size:10px;letter-spacing:0.2em;color:var(--gold);opacity:0.7;margin-bottom:6px;}
+.pgrid-name{font-family:'Gloock',serif;font-size:18px;color:var(--white);margin-bottom:4px;}
+.pgrid-sub{font-size:11px;line-height:1.6;color:rgba(253,250,247,0.5);max-height:0;overflow:hidden;transition:max-height 0.4s,opacity 0.4s;opacity:0;}
+.pgrid-tile:hover .pgrid-sub{max-height:44px;opacity:1;}
+.pgrid-arrow{font-size:13px;color:var(--gold);opacity:0;transform:translateX(-8px);transition:all 0.3s;margin-top:8px;display:inline-block;}
+.pgrid-tile:hover .pgrid-arrow{opacity:1;transform:translateX(0);}
+.pgrid-tile::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:var(--gold);transform:scaleX(0);transform-origin:left;transition:transform 0.4s;}
+.pgrid-tile:hover::after{transform:scaleX(1);}
+
+/* ÜBER */
+.ueber{min-height:100vh;display:grid;grid-template-columns:1fr 1fr;background:var(--white);}
+.ueber-img{position:relative;overflow:hidden;}
+.ueber-img img{width:100%;height:100%;object-fit:cover;filter:sepia(0.06) brightness(0.95);}
+.ueber-img-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(44,24,16,0.3) 0%,transparent 50%);}
+.ueber-content{padding:80px 75px;display:flex;flex-direction:column;justify-content:center;}
+.ueber-quote{font-family:'Gloock',serif;font-size:clamp(17px,2.1vw,24px);font-style:italic;line-height:1.55;color:var(--mocha);border-left:3px solid var(--gold);padding-left:22px;margin:22px 0 26px;}
+.ueber-body{font-size:13px;line-height:1.9;color:var(--ink2);margin-bottom:12px;}
+.ueber-stats{display:flex;gap:40px;margin-top:34px;padding-top:26px;border-top:1px solid var(--bg2);}
+.us-n{font-family:'Gloock',serif;font-size:30px;color:var(--gold);line-height:1;}
+.us-l{font-size:9px;letter-spacing:0.2em;text-transform:uppercase;color:var(--blush2);margin-top:5px;}
+
+/* TEAM */
+.team{padding:90px 60px;background:var(--bg);}
+.team-head{margin-bottom:48px;}
+.team-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}
+.team-card{background:var(--white);overflow:hidden;transition:transform 0.3s,box-shadow 0.3s;}
+.team-card:hover{transform:translateY(-5px);box-shadow:0 16px 48px rgba(44,24,16,0.1);}
+.team-card-img{position:relative;overflow:hidden;aspect-ratio:3/4;}
+.team-card-img img{width:100%;height:100%;object-fit:cover;object-position:top;filter:sepia(0.05) brightness(0.95);transition:transform 0.5s;}
+.team-card:hover .team-card-img img{transform:scale(1.04);}
+.team-card-body{padding:26px 26px 30px;}
+.team-role{font-size:9px;letter-spacing:0.3em;text-transform:uppercase;color:var(--gold);margin-bottom:7px;}
+.team-name{font-family:'Gloock',serif;font-size:21px;color:var(--mocha);margin-bottom:10px;}
+.team-bio{font-size:12px;line-height:1.75;color:var(--ink2);opacity:0.75;margin-bottom:18px;}
+.team-book{display:inline-block;font-size:9px;letter-spacing:0.2em;text-transform:uppercase;color:var(--mocha);border-bottom:1px solid var(--gold);padding-bottom:2px;text-decoration:none;transition:color 0.3s;}
+.team-book:hover{color:var(--gold);}
+
+/* TERMIN */
+.termin{min-height:70vh;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;background:var(--mocha);}
+.termin-bg{position:absolute;inset:0;background:url('https://images.unsplash.com/photo-1616394584738-fc6e612e71b9?w=1600&q=60') center/cover;opacity:0.12;}
+.termin-inner{position:relative;z-index:2;text-align:center;max-width:600px;padding:60px 40px;}
+.termin-tag{font-size:9px;letter-spacing:0.4em;text-transform:uppercase;color:var(--blush);margin-bottom:14px;}
+.termin-h{font-family:'Gloock',serif;font-size:clamp(30px,4.5vw,56px);line-height:1.1;color:var(--bg);margin-bottom:14px;}
+.termin-h em{font-style:italic;color:var(--gold-lt);}
+.termin-p{font-size:13px;line-height:1.8;color:rgba(247,243,238,0.6);margin-bottom:30px;}
+.termin-hours{display:flex;justify-content:center;gap:30px;margin-bottom:30px;padding:18px 28px;border:1px solid rgba(232,196,176,0.2);}
+.th-day{font-size:9px;letter-spacing:0.2em;text-transform:uppercase;color:var(--blush);margin-bottom:4px;}
+.th-time{font-family:'Gloock',serif;font-size:16px;color:var(--bg);}
+.btn-light{display:inline-block;background:var(--bg);color:var(--mocha);font-size:10px;font-weight:500;letter-spacing:0.25em;text-transform:uppercase;padding:15px 42px;text-decoration:none;transition:all 0.3s;}
+.btn-light:hover{background:var(--gold-lt);color:var(--white);}
+
+/* REVIEWS */
+.reviews{padding:90px 60px;background:var(--bg2);}
+.rev-header{display:grid;grid-template-columns:auto 1fr;gap:50px;align-items:center;margin-bottom:48px;padding-bottom:38px;border-bottom:1px solid rgba(184,137,58,0.15);}
+.rev-score-n{font-family:'Gloock',serif;font-size:66px;color:var(--gold);line-height:1;}
+.rev-score-s{font-size:15px;color:var(--gold);letter-spacing:5px;margin:5px 0;}
+.rev-score-l{font-size:9px;letter-spacing:0.2em;text-transform:uppercase;color:var(--ink2);}
+.rev-intro{font-family:'Gloock',serif;font-size:clamp(15px,2vw,22px);font-style:italic;line-height:1.55;color:var(--ink2);}
+.rev-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
+.rev-card{background:var(--white);padding:28px;border-bottom:3px solid transparent;transition:all 0.3s;}
+.rev-card:hover{border-color:var(--gold);transform:translateY(-3px);box-shadow:0 8px 28px rgba(44,24,16,0.06);}
+.rev-stars{font-size:11px;color:var(--gold);letter-spacing:3px;margin-bottom:12px;}
+.rev-q{font-family:'Gloock',serif;font-size:14px;font-style:italic;line-height:1.65;color:var(--ink2);margin-bottom:14px;}
+.rev-by{font-size:9px;letter-spacing:0.2em;text-transform:uppercase;color:var(--blush2);}
+
+/* KONTAKT */
+.kontakt{display:grid;grid-template-columns:1fr 1fr;background:var(--white);}
+.k-left{background:var(--bg);padding:80px 65px;display:flex;flex-direction:column;justify-content:center;}
+.k-details{margin-top:30px;}
+.k-row{padding:18px 0;border-bottom:1px solid var(--bg2);display:flex;flex-direction:column;gap:5px;}
+.k-row:first-child{border-top:1px solid var(--bg2);}
+.k-label{font-size:9px;letter-spacing:0.3em;text-transform:uppercase;color:var(--gold);}
+.k-val{font-family:'Gloock',serif;font-size:17px;color:var(--mocha);}
+.k-val a{color:inherit;text-decoration:none;transition:color 0.3s;}
+.k-val a:hover{color:var(--gold);}
+.k-hours{font-size:13px;line-height:2;color:var(--ink2);}
+.k-right{padding:80px 65px;display:flex;flex-direction:column;justify-content:center;}
+.form-2col{display:grid;grid-template-columns:1fr 1fr;gap:18px;}
+.fg{margin-bottom:20px;}
+.fg label{display:block;font-size:9px;letter-spacing:0.3em;text-transform:uppercase;color:var(--ink2);opacity:0.5;margin-bottom:9px;}
+.fg input,.fg textarea{width:100%;background:transparent;border:none;border-bottom:1.5px solid var(--bg2);padding:9px 0;color:var(--ink);font-family:'Outfit',sans-serif;font-weight:300;font-size:14px;outline:none;transition:border-color 0.3s;resize:none;}
+.fg input:focus,.fg textarea:focus{border-color:var(--gold);}
+.fg textarea{height:88px;}
+.form-submit{width:100%;background:var(--mocha);border:none;color:var(--bg);font-family:'Outfit',sans-serif;font-size:10px;font-weight:400;letter-spacing:0.3em;text-transform:uppercase;padding:15px;cursor:pointer;transition:background 0.3s;margin-top:4px;}
+.form-submit:hover{background:var(--gold);}
+
+/* FOOTER */
+footer{background:var(--mocha);padding:36px 60px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:14px;}
+.f-logo{font-family:'Gloock',serif;font-size:18px;letter-spacing:0.1em;color:var(--bg);}
+.f-logo span{color:var(--gold);}
+.f-copy{font-size:9px;letter-spacing:0.15em;color:rgba(247,243,238,0.3);}
+.f-links{display:flex;gap:22px;}
+.f-links a{font-size:9px;letter-spacing:0.15em;text-transform:uppercase;color:rgba(247,243,238,0.35);text-decoration:none;transition:color 0.3s;}
+.f-links a:hover{color:var(--gold);}
+
+/* WA */
+.wa{position:fixed;bottom:28px;right:28px;z-index:200;width:52px;height:52px;border-radius:50%;background:#25D366;display:flex;align-items:center;justify-content:center;text-decoration:none;box-shadow:0 4px 20px rgba(37,211,102,0.3);transition:transform 0.3s;}
+.wa:hover{transform:scale(1.1);}
+.wa svg{width:26px;height:26px;fill:white;}
+
+/* REVEAL */
+.reveal{opacity:0;transform:translateY(26px);transition:opacity 0.8s ease,transform 0.8s ease;}
+.reveal.visible{opacity:1;transform:translateY(0);}
+.rd1{transition-delay:0.12s;}
+.rd2{transition-delay:0.22s;}
+.rd3{transition-delay:0.32s;}
+
+@keyframes slideUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+
+/* RESPONSIVE */
+@media(max-width:1100px){
+  nav{padding:14px 24px;}
+  nav.compact{padding:10px 24px;}
+  .nav-links{display:none;}
+  .burger{display:flex;}
+  .drawer{display:flex;}
+  .hero{grid-template-columns:1fr;height:auto;}
+  .hero-img{height:52vw;min-height:260px;max-height:420px;}
+  .hero-copy{padding:36px 28px 44px;}
+  .hero-h1{font-size:clamp(30px,7vw,50px);}
+  .leistungen{padding:70px 20px;}
+  .leistungen-head{flex-direction:column;align-items:flex-start;gap:10px;}
+  .leistungen-head-right{text-align:left;max-width:100%;}
+  .photo-grid{grid-template-columns:repeat(2,1fr);gap:2px;}
+  .ueber{grid-template-columns:1fr;min-height:auto;}
+  .ueber-img{height:60vw;min-height:240px;max-height:380px;}
+  .ueber-content{padding:50px 24px;}
+  .team{padding:70px 20px;}
+  .team-grid{grid-template-columns:1fr 1fr;gap:16px;}
+  .termin{min-height:auto;padding:70px 24px;}
+  .termin-hours{flex-direction:column;gap:14px;padding:16px 22px;}
+  .reviews{padding:70px 20px;}
+  .rev-header{grid-template-columns:1fr;gap:20px;}
+  .rev-grid{grid-template-columns:1fr;gap:12px;}
+  .kontakt{grid-template-columns:1fr;}
+  .k-left{padding:60px 24px;}
+  .k-right{padding:60px 24px;}
+  .form-2col{grid-template-columns:1fr;}
+  footer{padding:28px 24px;flex-direction:column;align-items:flex-start;gap:12px;}
+}
+@media(max-width:600px){
+  .photo-grid{grid-template-columns:1fr;}
+  .team-grid{grid-template-columns:1fr;}
+  .ueber-stats{gap:20px;}
+  .hero-stat-row{gap:20px;}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="#" class="nav-logo">Beauty <span>Up</span></a>
+  <div class="nav-links">
+    <a href="#leistungen">Leistungen</a>
+    <a href="#ueber">Über uns</a>
+    <a href="#team">Team</a>
+    <a href="#bewertungen">Bewertungen</a>
+    <a href="#kontakt">Kontakt</a>
+    <a href="https://studiobookr.com" target="_blank" class="nav-btn">Termin buchen</a>
+  </div>
+  <button class="burger" onclick="openDrawer()"><span></span><span></span><span></span></button>
+</nav>
+
+<!-- DRAWER -->
+<div class="drawer-ov" id="dov" onclick="closeDrawer()"></div>
+<div class="drawer" id="drawer">
+  <button class="drawer-x" onclick="closeDrawer()">✕</button>
+  <a href="#leistungen" onclick="closeDrawer()">Leistungen</a>
+  <a href="#ueber" onclick="closeDrawer()">Über uns</a>
+  <a href="#team" onclick="closeDrawer()">Team</a>
+  <a href="#bewertungen" onclick="closeDrawer()">Bewertungen</a>
+  <a href="#kontakt" onclick="closeDrawer()">Kontakt</a>
+  <a href="https://studiobookr.com" target="_blank">Termin buchen →</a>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-img">
+    <img src="https://images.unsplash.com/photo-1560750133-c4b38c0a5f3d?w=1200&q=85" alt="Beauty Up Kosmetikstudio">
+    <div class="hero-img-tag">
+      <span class="hit-num">5,0 ★</span>
+      <span class="hit-label">226 Bewertungen</span>
+    </div>
+  </div>
+  <div class="hero-copy">
+    <div class="hero-eyebrow">
+      <div class="eyebrow-line"></div>
+      <span class="eyebrow-text">Kosmetikstudio · Fohnsdorf</span>
+    </div>
+    <h1 class="hero-h1">Schönheit,<br>die dich <em>strahlen</em> lässt.</h1>
+    <p class="hero-p">Professionelle Behandlungen, die du spürst — und siehst. Von Nicole und ihrem Team, mit Herz und über 8 Jahren Erfahrung.</p>
+    <div class="hero-actions">
+      <a href="https://studiobookr.com" target="_blank" class="btn-dark">Termin buchen</a>
+      <a href="#leistungen" class="btn-outline">Leistungen</a>
+    </div>
+    <div class="hero-stat-row">
+      <div><div class="hstat-n">226</div><div class="hstat-l">Bewertungen</div></div>
+      <div><div class="hstat-n">100%</div><div class="hstat-l">Empfehlung</div></div>
+      <div><div class="hstat-n">8+</div><div class="hstat-l">Jahre</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- MARQUEE — seamless loop via exact duplicate -->
+<div class="marquee-strip">
+  <div class="marquee-inner">
+    <span class="m-item">Kosmetik ·</span>
+    <span class="m-item">Make-up ·</span>
+    <span class="m-item">Nagelpflege & Design ·</span>
+    <span class="m-item">Fußpflege ·</span>
+    <span class="m-item">Online-Hautberatung ·</span>
+    <span class="m-item">Coaching ·</span>
+    <span class="m-item">Beautybox ·</span>
+    <span class="m-item">Fühl dich schön ·</span>
+    <span class="m-item">Kosmetik ·</span>
+    <span class="m-item">Make-up ·</span>
+    <span class="m-item">Nagelpflege & Design ·</span>
+    <span class="m-item">Fußpflege ·</span>
+    <span class="m-item">Online-Hautberatung ·</span>
+    <span class="m-item">Coaching ·</span>
+    <span class="m-item">Beautybox ·</span>
+    <span class="m-item">Fühl dich schön ·</span>
+  </div>
+</div>
+
+<!-- LEISTUNGEN -->
+<section id="leistungen" class="leistungen">
+  <div class="leistungen-head reveal">
+    <div>
+      <p class="section-tag">Unsere Leistungen</p>
+      <h2 class="section-title">Alles für deine<br><em>Schönheit & Pflege</em></h2>
+    </div>
+    <div class="leistungen-head-right">Klick auf eine Leistung für alle Details.</div>
+  </div>
+  <div class="photo-grid">
+
+    <div class="pgrid-tile reveal">
+      <img src="https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?w=700&q=80" alt="Kosmetik">
+      <div class="pgrid-overlay">
+        <div class="pgrid-num">01</div>
+        <div class="pgrid-name">Kosmetik</div>
+        <div class="pgrid-sub">Individuelle Gesichtsbehandlungen für jede Haut.</div>
+        <span class="pgrid-arrow">→</span>
+      </div>
+    </div>
+
+    <div class="pgrid-tile reveal rd1">
+      <img src="https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=700&q=80" alt="Make-up">
+      <div class="pgrid-overlay">
+        <div class="pgrid-num">02</div>
+        <div class="pgrid-name">Make-up</div>
+        <div class="pgrid-sub">Professionelles Make-up für jeden Anlass.</div>
+        <span class="pgrid-arrow">→</span>
+      </div>
+    </div>
+
+    <div class="pgrid-tile reveal rd2">
+      <img src="https://images.unsplash.com/photo-1604654894610-df63bc536371?w=700&q=80" alt="Nagelpflege und Design">
+      <div class="pgrid-overlay">
+        <div class="pgrid-num">03</div>
+        <div class="pgrid-name">Nagelpflege & Design</div>
+        <div class="pgrid-sub">Von klassisch bis kreativ — perfekte Nägel.</div>
+        <span class="pgrid-arrow">→</span>
+      </div>
+    </div>
+
+    <div class="pgrid-tile reveal rd3">
+      <img src="https://images.unsplash.com/photo-1540555700478-4be289fbecef?w=700&q=80" alt="Fußpflege">
+      <div class="pgrid-overlay">
+        <div class="pgrid-num">04</div>
+        <div class="pgrid-name">Fußpflege</div>
+        <div class="pgrid-sub">Verwöhnende Behandlung für gepflegte Füße.</div>
+        <span class="pgrid-arrow">→</span>
+      </div>
+    </div>
+
+    <div class="pgrid-tile reveal">
+      <img src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=700&q=80" alt="Online-Hautberatung">
+      <div class="pgrid-overlay">
+        <div class="pgrid-num">05</div>
+        <div class="pgrid-name">Online-Hautberatung</div>
+        <div class="pgrid-sub">Professionelle Beratung bequem von zuhause.</div>
+        <span class="pgrid-arrow">→</span>
+      </div>
+    </div>
+
+    <div class="pgrid-tile reveal rd1">
+      <img src="https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=700&q=80" alt="Coaching">
+      <div class="pgrid-overlay">
+        <div class="pgrid-num">06</div>
+        <div class="pgrid-name">Coaching</div>
+        <div class="pgrid-sub">Persönliches Coaching für dein inneres Strahlen.</div>
+        <span class="pgrid-arrow">→</span>
+      </div>
+    </div>
+
+    <div class="pgrid-tile reveal rd2">
+      <img src="https://images.unsplash.com/photo-1556228578-8c89e6adf883?w=700&q=80" alt="Beautybox">
+      <div class="pgrid-overlay">
+        <div class="pgrid-num">07</div>
+        <div class="pgrid-name">Beautybox</div>
+        <div class="pgrid-sub">Kuratierte Schönheitsprodukte direkt zu dir.</div>
+        <span class="pgrid-arrow">→</span>
+      </div>
+    </div>
+
+    <div class="pgrid-tile reveal rd3">
+      <img src="https://images.unsplash.com/photo-1600334129128-685c5582fd35?w=700&q=80" alt="Fühl dich schön">
+      <div class="pgrid-overlay">
+        <div class="pgrid-num">08</div>
+        <div class="pgrid-name">Fühl dich schön</div>
+        <div class="pgrid-sub">Das Onlineprogramm — dein persönliches Erfolgsrezept.</div>
+        <span class="pgrid-arrow">→</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ÜBER NICOLE -->
+<section id="ueber" class="ueber">
+  <div class="ueber-img">
+    <img src="https://images.unsplash.com/photo-1487412947147-5cebf100ffc2?w=900&q=85" alt="Nicole Scheucher – Inhaberin Beauty Up">
+    <div class="ueber-img-overlay"></div>
+  </div>
+  <div class="ueber-content reveal">
+    <p class="section-tag">Über Nicole</p>
+    <h2 class="section-title">Kosmetikmeisterin<br>& <em>Inhaberin.</em></h2>
+    <blockquote class="ueber-quote">"Menschen in ihre Kraft und zum Strahlen zu bringen ist mein ganz persönliches Herzensprojekt."</blockquote>
+    <p class="ueber-body">Nicole absolvierte ihre Ausbildung zur staatlich geprüften Kosmetikerin 2007, Nageldesignerin 2008 und ihre Meisterprüfung für Kosmetik 2012.</p>
+    <p class="ueber-body">Sie lebt mit ihrer Familie in der Steiermark und arbeitet täglich mit voller Leidenschaft in ihrem Studio in Fohnsdorf. Ihr Lächeln ist der Grund, warum sie jeden Tag gern zur Arbeit geht.</p>
+    <div class="ueber-stats">
+      <div><div class="us-n">226</div><div class="us-l">Bewertungen</div></div>
+      <div><div class="us-n">100%</div><div class="us-l">Empfehlung</div></div>
+      <div><div class="us-n">8+</div><div class="us-l">Jahre</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- TEAM -->
+<section id="team" class="team">
+  <div class="team-head reveal">
+    <p class="section-tag">Unser Team</p>
+    <h2 class="section-title">Menschen, die dich <em>begeistern.</em></h2>
+  </div>
+  <div class="team-grid">
+
+    <div class="team-card reveal">
+      <div class="team-card-img">
+        <img src="https://images.unsplash.com/photo-1487412947147-5cebf100ffc2?w=600&q=85" alt="Nicole Scheucher">
+      </div>
+      <div class="team-card-body">
+        <p class="team-role">Inhaberin · Kosmetikmeisterin</p>
+        <h3 class="team-name">Nicole Scheucher</h3>
+        <p class="team-bio">Staatl. gepr. Kosmetikerin, Nageldesignerin & Kosmetikmeisterin. Ihr Lächeln ist der Grund, warum sie jeden Tag gern zur Arbeit geht.</p>
+        <a href="https://studiobookr.com" target="_blank" class="team-book">Termin bei Nicole →</a>
+      </div>
+    </div>
+
+    <div class="team-card reveal rd1">
+      <div class="team-card-img">
+        <img src="https://images.unsplash.com/photo-1594744803329-e58b31de8bf5?w=600&q=85" alt="Tanja Neubacher">
+      </div>
+      <div class="team-card-body">
+        <p class="team-role">Kosmetikerin</p>
+        <h3 class="team-name">Tanja Neubacher</h3>
+        <p class="team-bio">Ich lebe die Schönheit und liebe es, Menschen zu unterstützen, in ihre schönste und gesündeste Form zu kommen.</p>
+        <a href="https://studiobookr.com" target="_blank" class="team-book">Termin bei Tanja →</a>
+      </div>
+    </div>
+
+    <div class="team-card reveal rd2">
+      <div class="team-card-img">
+        <img src="https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?w=600&q=85" alt="Maria Schnabl">
+      </div>
+      <div class="team-card-body">
+        <p class="team-role">Kosmetikerin</p>
+        <h3 class="team-name">Maria Schnabl</h3>
+        <p class="team-bio">Ich bringe 30 Jahre Berufserfahrung mit, um meine Kundinnen und Kunden optimal zu beraten. Leidenschaft ist meine Motivation.</p>
+        <a href="https://studiobookr.com" target="_blank" class="team-book">Termin bei Maria →</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- TERMIN BANNER -->
+<section class="termin">
+  <div class="termin-bg"></div>
+  <div class="termin-inner reveal">
+    <p class="termin-tag">Online buchen</p>
+    <h2 class="termin-h">Dein Termin,<br><em>einfach & sofort.</em></h2>
+    <p class="termin-p">Wähle Behandlung, Datum und Uhrzeit — ganz bequem von zuhause. Rund um die Uhr verfügbar.</p>
+    <div class="termin-hours">
+      <div><div class="th-day">Di – Fr</div><div class="th-time">08:00 – 17:00</div></div>
+      <div><div class="th-day">Samstag</div><div class="th-time">nach Vereinbarung</div></div>
+      <div><div class="th-day">Montag</div><div class="th-time">Ruhetag</div></div>
+    </div>
+    <a href="https://studiobookr.com" target="_blank" class="btn-light">Jetzt Termin buchen</a>
+  </div>
+</section>
+
+<!-- REVIEWS -->
+<section id="bewertungen" class="reviews">
+  <div class="rev-header reveal">
+    <div>
+      <div class="rev-score-n">5,0</div>
+      <div class="rev-score-s">★★★★★</div>
+      <div class="rev-score-l">226 Bewertungen</div>
+    </div>
+    <p class="rev-intro">"Nici und ihr Team schaffen eine Atmosphäre, die einen sofort aus dem stressigen Alltag holt — jeder Termin ist reine Wohlfühlzeit."</p>
+  </div>
+  <div class="rev-grid">
+    <div class="rev-card reveal">
+      <div class="rev-stars">★★★★★</div>
+      <p class="rev-q">"Ich komme seit Jahren zu Beauty Up und würde nie wechseln. Immer perfekt auf mich abgestimmt."</p>
+      <span class="rev-by">— Stammkundin</span>
+    </div>
+    <div class="rev-card reveal rd1">
+      <div class="rev-stars">★★★★★</div>
+      <p class="rev-q">"Professionell, herzlich und einfach toll. Nicole weiß genau was sie tut — das merkt man sofort."</p>
+      <span class="rev-by">— Kundin, 2026</span>
+    </div>
+    <div class="rev-card reveal rd2">
+      <div class="rev-stars">★★★★★</div>
+      <p class="rev-q">"Das Beste an Fohnsdorf. Ich fahre extra aus Knittelfeld her — weil es sich jedes Mal lohnt."</p>
+      <span class="rev-by">— Treue Kundin</span>
+    </div>
+  </div>
+</section>
+
+<!-- KONTAKT -->
+<section id="kontakt" class="kontakt">
+  <div class="k-left reveal">
+    <p class="section-tag">Kontakt & Anfahrt</p>
+    <h2 class="section-title">Wir freuen uns<br>auf <em>dich.</em></h2>
+    <div class="k-details">
+      <div class="k-row">
+        <span class="k-label">Adresse</span>
+        <span class="k-val">Hauptstraße 12, 8753 Fohnsdorf</span>
+      </div>
+      <div class="k-row">
+        <span class="k-label">Telefon</span>
+        <span class="k-val"><a href="tel:+436764545391">0676 45 45 391</a></span>
+      </div>
+      <div class="k-row">
+        <span class="k-label">E-Mail</span>
+        <span class="k-val"><a href="mailto:mail@beautyup.at">mail@beautyup.at</a></span>
+      </div>
+      <div class="k-row">
+        <span class="k-label">Öffnungszeiten</span>
+        <div class="k-hours">Di – Fr &nbsp;&nbsp;08:00 – 17:00 Uhr<br>Samstag &nbsp;&nbsp;nach Vereinbarung<br>Montag &nbsp;&nbsp;Ruhetag</div>
+      </div>
+    </div>
+  </div>
+  <div class="k-right reveal rd1">
+    <p class="section-tag">Schreib uns</p>
+    <h2 class="section-title" style="margin-bottom:32px;">Deine <em>Nachricht</em></h2>
+    <div class="form-2col">
+      <div class="fg"><label>Name</label><input type="text" placeholder="Dein Name"></div>
+      <div class="fg"><label>E-Mail</label><input type="email" placeholder="deine@email.at"></div>
+    </div>
+    <div class="fg"><label>Betreff</label><input type="text" placeholder="Worum geht es?"></div>
+    <div class="fg"><label>Nachricht</label><textarea placeholder="Wie können wir dir helfen?"></textarea></div>
+    <button class="form-submit">Nachricht senden</button>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="f-logo">Beauty <span>Up</span></div>
+  <p class="f-copy">© 2026 Beauty Up – Nicole Scheucher · Fohnsdorf, Steiermark</p>
+  <div class="f-links">
+    <a href="#">Impressum</a>
+    <a href="#">Datenschutz</a>
+  </div>
+</footer>
+
+<!-- WHATSAPP -->
+<a href="https://wa.me/436764545391" class="wa" target="_blank" aria-label="WhatsApp">
+  <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
+
+<script>
+window.addEventListener('scroll', () => {
+  document.getElementById('nav').classList.toggle('compact', scrollY > 50);
+});
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.08 });
+document.querySelectorAll('.reveal').forEach(r => obs.observe(r));
+function openDrawer() {
+  document.getElementById('drawer').classList.add('open');
+  document.getElementById('dov').classList.add('open');
+}
+function closeDrawer() {
+  document.getElementById('drawer').classList.remove('open');
+  document.getElementById('dov').classList.remove('open');
+}
+</script>
+</body>
+</html>
